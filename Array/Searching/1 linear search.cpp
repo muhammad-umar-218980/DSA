@@ -3,12 +3,9 @@
 using namespace std;
 
 template <typename T>
-int linear_search(T arr[], int size, T target)
-{
-	for (int i = 0; i < size; i++)
-	{
-		if (arr[i] == target)
-		{
+int linear_search(T arr[], int size, T target) {
+	for (int i = 0; i < size; i++) {
+		if (arr[i] == target) {
 			return i;
 		}
 	}
@@ -16,13 +13,11 @@ int linear_search(T arr[], int size, T target)
 }
 
 template <typename T>
-void run_search(int size)
-{
+void run_search(int size) {
 	T arr[size];
 
 	cout << "\n---- Enter the elements of Array ----\n";
-	for (int i = 0; i < size; i++)
-	{
+	for (int i = 0; i < size; i++) {
 		cout << "Enter element " << i + 1 << " : ";
 		cin >> arr[i];
 	}
@@ -33,20 +28,16 @@ void run_search(int size)
 
 	int index = linear_search(arr, size, target);
 
-	if (index != -1)
-	{
+	if (index != -1) {
 		cout << "\n"
-		     << target << " is found at index " << index << endl;
-	}
-	else
-	{
+			 << target << " is found at index " << index << endl;
+	} else {
 		cout << "\n"
-		     << target << " is not found in the array." << endl;
+			 << target << " is not found in the array." << endl;
 	}
 }
 
-int main()
-{
+int main() {
 	int size;
 	cout << "Enter the size of Array : ";
 	cin >> size;
@@ -61,8 +52,7 @@ int main()
 	int choice;
 	cin >> choice;
 
-	switch (choice)
-	{
+	switch (choice) {
 	case 1:
 		run_search<int>(size);
 		break;
