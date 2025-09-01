@@ -1,0 +1,101 @@
+Linked List
+
+List ADT (Abstract Data Type)
+
+A list is an ordered collection of elements.
+
+Order is maintained by position, not necessarily sorted by value.
+First element = head.
+Last element = tail.
+Empty list -> has no elements.
+Length = number of elements in the list.
+
+Basic Operations on a List
+
+Insert -> add an element.
+Delete -> remove an element.
+Traverse -> access each element sequentially.
+Access -> read an element at a position.
+Create -> make a new empty list.
+Clear -> remove all elements.
+
+Implementations of List
+
+Array-based
+Simple, but requires contiguous memory.
+Size must be known or resizing is costly.
+Insertion/deletion at middle requires shifting.
+
+Linked List-based
+Uses nodes connected by pointers.
+Dynamic memory allocation -> no fixed size.
+Efficient insertions and deletions.
+
+Why Linked List? (Problems with Arrays)
+
+Arrays are contiguous in memory -> not always available.
+Arrays are fixed size -> difficult to resize.
+Resizing requires copying to new memory.
+Possible wastage of memory if array is large.
+-> Linked List solves all these problems.
+
+Linked List Basics
+
+A linked list is a collection of nodes.
+
+Each node has:
+
+Data (value).
+Pointer (address of next node).
+
+Nodes may be scattered in memory.
+New nodes can be created/deleted dynamically.
+No shifting required (just change links).
+
+Simple Linked List in C++
+
+class Node {
+public:
+    int data;
+    Node* next;
+};
+
+class List {
+public:
+    Node* head;  // points to first node
+};
+
+Operations in Linked List
+
+Searching -> Traverse until target found.
+Insertion
+At head -> new node becomes first.
+At middle -> adjust pointers between nodes.
+At end -> add after last node.
+Deletion -> Remove node and update links.
+
+Insertion Algorithm
+
+Case 1: Insert at head
+
+Create new node.
+Set new node’s next = head.
+Update head = new node.
+
+Case 2: Insert at middle/end (after a node)
+
+Create new node.
+Traverse to the position (say prev).
+Set newNode->next = prev->next.
+Set prev->next = newNode.
+
+Example: InsertNode Function
+
+void InsertNode(Node* prev, int value) {
+    if (prev == NULL) return; // invalid case
+    
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = prev->next;
+    prev->next = newNode;
+}
