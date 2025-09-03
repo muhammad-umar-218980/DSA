@@ -48,6 +48,10 @@ public:
 	}
 	
 	void pop_front(){
+		if(head == nullptr){
+			cout << "List is empty \n";
+			return;
+		}
 		Node* temp = head;
 		head = head->next;
 		temp->next = nullptr;
