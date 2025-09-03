@@ -7,9 +7,10 @@ public:
 	Node* next;
 	
 	Node(int val){
-		this->data = val;
-		this->next = nullptr;
+		data = val;
+		next = nullptr;
 	}
+
 };
 
 class List{
@@ -17,21 +18,22 @@ class List{
 	
 public:
 	List(){
-		this->head = nullptr;
+		head = nullptr;
 	}
+
 	
 	void push_front(int val){
 		Node* newNode = new Node(val);
-		if(this->head == nullptr){
-			this->head = newNode;
-			return;
-		}
-		newNode->next = this->head;
-		this->head = newNode;
+		   if(head == nullptr){
+			   head = newNode;
+			   return;
+		   }
+		   newNode->next = head;
+		   head = newNode;
 	}
 	
 	void print(){
-		Node* temp = this->head;
+		Node* temp = head;
 		while(temp != nullptr){
 			cout << temp->data << "->" ;
 			temp = temp->next;
@@ -46,6 +48,7 @@ int main(){
 	ll.push_front(3);
 	ll.push_front(2);
 	ll.push_front(1);
+	ll.push_back(67);
 	ll.print();
 	return 0;
 }
