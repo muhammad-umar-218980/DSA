@@ -109,6 +109,30 @@ public:
     	n->next = current->next;
     	current->next = n;
 	}
+	
+	void deleteByPosition(int pos){
+		if(pos <= 0){
+			cout << "Invalid Position\n";
+			return;
+		}
+		
+		if(pos == 1){
+			this->pop_front();
+			return;
+		}
+		
+		Node* current = head;
+		int idx = 1 ;
+		while(idx < pos-1 && current != nullptr){
+			current = current->next;
+			idx++;
+		}
+		
+		Node* deletedNode = current->next;
+		current->next = deletedNode->next;
+		deletedNode->next = nullptr;
+		delete deletedNode;
+	}
 
 	
 	
