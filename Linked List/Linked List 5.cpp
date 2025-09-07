@@ -210,19 +210,46 @@ int main() {
 //
 //	ll.insert(4,100);
 
-	for(int i = 0 ; i < 5 ; i++) {
-		ll.push_back(i+1);
-	}
+//	for(int i = 0 ; i < 5 ; i++) {
+//		ll.push_back(i+1);
+//	}
+//
+//	ll.insert(4,65);
+//	ll.insert(4,100);
+//
+//
+//	ll.print();
+//
+//	ll.deleteByValue(100);
+//	ll.print();
+//
+//	ll.deleteByPosition(4);
+//	ll.print();
 
-	ll.insert(4,65);
-	ll.insert(4,100);
 
+// Case 1: Delete from empty list
+ll.deleteByPosition(1);
+ll.deleteByValue(10);
 
-	ll.print();
+// Case 2: Single element list
+ll.push_back(5);
+ll.deleteByValue(5); // should clear
+ll.print();
 
-	ll.deleteByValue(100);
-	ll.print();
+// Case 3: Insert at start, middle, end
+ll.push_back(1);
+ll.push_back(2);
+ll.push_back(3);
+ll.insert(1, 100);   // at head
+ll.insert(3, 200);   // in middle
+ll.insert(6, 300);   // at end
+ll.print();
 
-	ll.deleteByPosition(4);
-	ll.print();
+// Case 4: Delete by value not found
+ll.deleteByValue(999);
+
+// Case 5: Delete last element by position
+ll.deleteByPosition(6);
+ll.print();
+
 }
