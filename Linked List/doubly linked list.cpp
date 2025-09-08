@@ -108,9 +108,6 @@ class DoublyList {
 				return;
 			}
 
-
-			Node* newNode = new Node(val);
-
 			Node* current = head;
 			int idx = 1;
 
@@ -119,10 +116,70 @@ class DoublyList {
 				idx++;
 			}
 
+			if(current == nullptr) {
+				cout << "Position out of range\n";
+				return;
+			}
+
+
+			if(current == tail) {
+				push_back(val);
+				return;
+			}
+
+
+			Node* newNode = new Node(val);
+
 			newNode->next = (*current).next;
 			current->next->prev = newNode;
 			current->next = newNode;
 			newNode->prev = current;
+
+			this->print();
+		}
+
+		void deleteByPosition(int pos) {
+
+			if (isEmpty()) {
+				cout << "List is empty\n";
+				return;
+			}
+			if(pos<=0) {
+				cout << "Invalid Position";
+				return ;
+			}
+
+			if(pos == 1) {
+				this->pop_front();
+				return;
+			}
+
+			Node* current = head;
+			int idx = 1;
+
+			while(current != nullptr && idx<pos-1) {
+				current = current->next;
+				idx++;
+			}
+
+			if (current == nullptr || current->next == nullptr) {
+				cout << "Position out of range\n";
+				return;
+			}
+
+			Node* deletedNode = current->next;
+
+			if (deletedNode == tail) {
+				this->pop_back();  
+				return;
+			}
+
+			current->next = deletedNode->next;
+			deletedNode->next->prev = current;
+			
+			deletedNode->next = nullptr;
+			deletedNode->prev = nullptr;
+			delete deletedNode;
 
 			this->print();
 		}
@@ -171,7 +228,10 @@ int main() {
 		dll.push_back(i+1);
 	}
 
-	dll.insert(4,65);
+	dll.insert(4,4);
+	dll.insert(1,100);
+
+	dll.deleteByPosition(6);
 
 	return 0;
 }
