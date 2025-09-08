@@ -62,7 +62,7 @@ class DoublyList {
 
 			if(head->next == nullptr) {
 				delete head;
-				head->next = nullptr;
+				head = tail = nullptr;
 				this->print();
 				return;
 			}
@@ -83,7 +83,7 @@ class DoublyList {
 
 			if(tail->prev == nullptr) {
 				delete tail;
-				head->prev = nullptr;
+				head = tail = nullptr;
 				this->print();
 				return;
 			}
@@ -92,6 +92,37 @@ class DoublyList {
 			tail->next = nullptr;
 			temp->prev = nullptr;
 			delete temp;
+
+			this->print();
+		}
+
+		void insert(int pos, int val) {
+
+			if(pos <= 0) {
+				cout << "Invalid position\n";
+				return;
+			}
+
+			if(pos == 1) {
+				push_front(val);
+				return;
+			}
+
+
+			Node* newNode = new Node(val);
+
+			Node* current = head;
+			int idx = 1;
+
+			while(current != nullptr && idx <pos-1) {
+				current = current->next;
+				idx++;
+			}
+
+			newNode->next = (*current).next;
+			current->next->prev = newNode;
+			current->next = newNode;
+			newNode->prev = current;
 
 			this->print();
 		}
@@ -121,17 +152,26 @@ int main() {
 
 	DoublyList dll;
 
-	dll.push_front(3);
-	dll.push_front(2);
-	dll.push_front(1);
+//	dll.push_front(3);
+//	dll.push_front(2);
+//	dll.push_front(1);
+//
+//	dll.push_back(4);
+//	dll.push_back(5);
+//
+//	dll.pop_front();
+//	dll.pop_front();
+//
+//	dll.pop_back();
+//	dll.pop_back();
 
-	dll.push_back(4);
-	dll.push_back(5);
+	for(int i= 0 ; i < 6 ; i++) {
+		if(i == 3) continue;
 
-	dll.pop_front();
-	dll.pop_front();
-	
-	dll.pop_back();
-	dll.pop_back();
+		dll.push_back(i+1);
+	}
+
+	dll.insert(4,65);
+
 	return 0;
 }
