@@ -170,13 +170,61 @@ class DoublyList {
 			Node* deletedNode = current->next;
 
 			if (deletedNode == tail) {
-				this->pop_back();  
+				this->pop_back();
 				return;
 			}
 
 			current->next = deletedNode->next;
 			deletedNode->next->prev = current;
+
+			deletedNode->next = nullptr;
+			deletedNode->prev = nullptr;
+			delete deletedNode;
+
+			this->print();
+		}
+		
+		
+		
+
+		void deleteByValue(int val) {
 			
+			if (isEmpty()) {
+				cout << "List is empty\n";
+				return;
+			}
+			
+			if(head->data == val){
+				pop_front();
+				return;
+			}
+			
+			
+			
+			Node* current = head;
+
+			while(current != nullptr && current->next != nullptr && current->next->data != val) {
+
+				current = current->next;
+				
+			}
+
+				if(current == nullptr || current->next == nullptr){
+					cout << val << " not found in the list ";
+					return;
+				}
+			
+			
+			Node* deletedNode = current->next;
+
+			if (deletedNode == tail) {
+				this->pop_back();
+				return;
+			}
+
+			current->next = deletedNode->next;
+			deletedNode->next->prev = current;
+
 			deletedNode->next = nullptr;
 			deletedNode->prev = nullptr;
 			delete deletedNode;
@@ -232,6 +280,10 @@ int main() {
 	dll.insert(1,100);
 
 	dll.deleteByPosition(6);
+	
+	dll.deleteByValue(100);
+	dll.deleteByValue(2);
+	dll.deleteByValue(67);
 
 	return 0;
 }
