@@ -210,7 +210,7 @@ class DoublyList {
 			}
 
 				if(current == nullptr || current->next == nullptr){
-					cout << val << " not found in the list ";
+					cout << val << " not found in the list \n";
 					return;
 				}
 			
@@ -230,6 +230,32 @@ class DoublyList {
 			delete deletedNode;
 
 			this->print();
+		}
+		
+		
+		int& operator[](int index){
+			
+			static int Invalid = -1;
+			
+			if(index < 0){
+				cout << "Invalid Index ";
+				return Invalid;
+			}
+			
+			int idx = 0 ;
+			Node* current = head;
+			
+			while(current != nullptr && idx < index){
+				current = current->next;
+				idx++;
+			}
+			
+			if(current == nullptr){
+				cout << "Index out of range ";
+				return Invalid;
+			}
+			
+			return current->data;
 		}
 
 		void print() {
@@ -284,6 +310,10 @@ int main() {
 	dll.deleteByValue(100);
 	dll.deleteByValue(2);
 	dll.deleteByValue(67);
+	cout << "\nValue at index 2 : " <<dll[2];
+	cout << "\nValue at index 9 : " <<dll[9];
+	cout << "\nValue at index -1 : " <<dll[-1];
+	cout << "\nValue at index 3 : " <<dll[3];
 
 	return 0;
 }
