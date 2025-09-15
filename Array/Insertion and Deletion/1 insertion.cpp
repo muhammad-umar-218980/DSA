@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-void insertFunction(int arr[], int newSize, int element, int index){
+void insertFunction(int arr[], int size, int element, int index){
 
-	for(int i = newSize;i > index ; i--){
+	for(int i = size;i > index ; i--){
 		arr[i] = arr[i-1];
 	}
 	
@@ -13,9 +13,14 @@ void insertFunction(int arr[], int newSize, int element, int index){
 }
 
 void printArray(int arr[], int newSize){
+	cout << "[";
 	for(int i = 0 ; i < newSize ; i++){
-		cout << arr[i];
+		if(i < newSize-1)
+			cout << arr[i] << " , ";
+		else
+			cout << arr[i] << "";
 	}
+	cout << "]";
 }
 
 int main(){
@@ -40,7 +45,7 @@ int main(){
 	cout << "\nEnter the index at which to insert the element : ";
 	cin >> index;
 
-	insertFunction(arr, newSize, element, index);
+	insertFunction(arr, size, element, index);
 	
 	printArray(arr,newSize);
 	
