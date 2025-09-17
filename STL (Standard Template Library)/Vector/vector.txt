@@ -1,0 +1,276 @@
+📘 C++ Vector
+
+💡 Introduction
+------------------
+Vectors are dynamic arrays that can grow and shrink in size automatically.
+They are part of the C++ Standard Template Library (STL).
+#include <vector> is required to use vectors.
+
+🚀 Vector Initialization
+----------------------------
+
+1. Empty Vector:
+   vector<int> vec;
+
+2. Initialize with values:
+   vector<int> vec = {1, 2, 3, 4, 5};
+
+3. Initialize with size and default value:
+   vector<int> vec(5, 10); // Creates: {10, 10, 10, 100, 100}
+
+4. Initialize from another vector:
+   vector<int> vec1 = {1, 2, 3};
+   vector<int> vec2(vec1); // vec2: {1, 2, 3}
+
+5. Initialize with iterators:
+   vector<int> vec3(vec1.begin(), vec1.end());
+
+📊 Size vs Capacity
+-----------------------
+- size(): Number of elements currently in vector
+- capacity(): Total storage space currently allocated
+
+Example:
+vector<int> v;
+v.push_back(1);
+v.push_back(2);
+v.push_back(3);
+
+cout << "Size: " << v.size();     // Output: 3
+cout << "Capacity: " << v.capacity(); // Output: 4 (implementation dependent)
+
+📈 Capacity Growth Mechanism
+-------------------------------
+When a vector needs to grow beyond its current capacity:
+1. It allocates a new, larger memory block (typically 2x current capacity)
+2. Copies all existing elements to the new memory
+3. Releases the old memory
+4. Adds the new element
+
+This process ensures amortized O(1) time complexity for push_back operations
+
+Example demonstrating capacity growth:
+vector<int> v;
+cout << "Initial capacity: " << v.capacity() << endl; // 0
+
+for (int i = 0; i < 10; i++) {
+    v.push_back(i);
+    cout << "Size: " << v.size() 
+         << " | Capacity: " << v.capacity() << endl;
+}
+
+// Typical output pattern:
+// Size: 1 | Capacity: 1
+// Size: 2 | Capacity: 2
+// Size: 3 | Capacity: 4
+// Size: 5 | Capacity: 8
+// Size: 9 | Capacity: 16
+
+🔧 Modifying Vectors
+-----------------------
+
+push_back():
+vector<int> v;
+v.push_back(10); // v: {10}
+v.push_back(20); // v: {10, 20}
+
+pop_back():
+v.pop_back(); // Removes last element: v: {10}
+
+emplace_back() (More efficient than push_back):
+v.emplace_back(30); // v: {10, 30}
+
+📋 Accessing Elements
+-----------------------
+
+at() (with bounds checking):
+vector<int> v = {10, 20, 30};
+cout << v.at(1); // Output: 20
+// v.at(5) would throw std::out_of_range
+
+[] (without bounds checking):
+cout << v[1]; // Output: 20
+// v[5] would cause undefined behavior
+
+front() and back():
+cout << v.front(); // Output: 10 (first element)
+cout << v.back();  // Output: 30 (last element)
+
+data() - Direct access to underlying array:
+int* ptr = v.data();
+cout << ptr[1]; // Output: 20
+
+🔄 Vector Operations
+-----------------------
+
+empty(): Check if vector is empty
+if (v.empty()) {
+    cout << "Vector is empty";
+}
+
+clear(): Remove all elements
+v.clear(); // v becomes empty, capacity remains unchanged
+
+insert(): Insert elements at position
+vector<int> v = {10, 20, 30};
+v.insert(v.begin() + 1, 15); // v: {10, 15, 20, 30}
+
+erase(): Remove elements at position
+v.erase(v.begin() + 1); // v: {10, 20, 30}
+
+assign(): Replace all elements
+v.assign(5, 100); // v: {100, 100, 100, 100, 100}
+v.assign({10, 20, 30}); // v: {10, 20, 30}
+
+swap(): Exchange contents with another vector
+vector<int> v1 = {1, 2, 3};
+vector<int> v2 = {4, 5, 6};
+v1.swap(v2); // v1: {4, 5, 6}, v2: {1, 2, 3}
+
+shrink_to_fit(): Reduce capacity to fit size
+v.reserve(100);
+v.shrink_to_fit(); // Capacity reduces to match size
+
+🧭 Vector Iterators
+-----------------------
+
+Traditional iterator:
+vector<int> v = {10, 20, 30};
+vector<int>::iterator itr;
+for (itr = v.begin(); itr != v.end(); itr++) {
+    cout << *itr << " ";
+}
+
+Using auto keyword (modern approach):
+for (auto itr = v.begin(); itr != v.end(); itr++) {
+    cout << *itr << " ";
+}
+
+Range-based for loop (simplest):
+for (auto element : v) {
+    cout << element << " ";
+}
+
+Iterator types:
+- v.begin()  → Iterator to first element
+- v.end()    → Iterator to position after last element
+- v.rbegin() → Reverse iterator to last element
+- v.rend()   → Reverse iterator to position before first element
+
+Reverse iteration example:
+for (auto itr = v.rbegin(); itr != v.rend(); itr++) {
+    cout << *itr << " "; // Output: 30 20 10
+}
+
+⚡ Performance Considerations
+-------------------------------
+Time Complexities:
+- Random access ([]/at()): O(1)
+- Insertion/removal at end: O(1) amortized
+- Insertion/removal at middle: O(n)
+- Search: O(n)
+
+📝 Iterator Invalidation
+---------------------------
+Modifying vectors can invalidate iterators:
+- push_back() may invalidate all iterators if reallocation occurs
+- insert() invalidates iterators from insertion point onward
+- erase() invalidates iterators from erasure point onward
+
+🔍 Comparison Operators
+---------------------------
+Vectors support comparison operators (==, !=, <, >, <=, >=)
+Works lexicographically (element-by-element comparison)
+
+Example:
+vector<int> v1 = {1, 2, 3};
+vector<int> v2 = {1, 2, 4};
+cout << (v1 < v2); // Output: 1 (true)
+
+🎯 Specialized Use Cases
+---------------------------
+1. Vector of vectors (2D array):
+vector<vector<int>> matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+
+2. Vector with custom objects:
+class MyClass {
+    // class definition
+};
+vector<MyClass> objects;
+
+3. Vector with move semantics (C++11):
+vector<string> v;
+v.emplace_back("world"); // Constructs in place (more efficient)
+
+💡 Memory Management Tips
+----------------------------
+- Use reserve() to pre-allocate memory if you know the approximate size needed
+- This prevents multiple reallocations and improves performance
+
+Example of reserve():
+vector<int> v;
+v.reserve(100); // Pre-allocate memory for 100 elements
+// Now push_back operations up to 100 elements won't cause reallocation
+
+✅ Best Practices
+-----------------------
+1. Use emplace_back() instead of push_back() when possible
+2. Prefer at() over [] for bounds checking in debug builds
+3. Use reserve() when you know the approximate size needed
+4. Use range-based for loops for simplicity when you don't need the index
+5. Be cautious when using iterators after modifying vector
+6. Use algorithms over manual loops when possible:
+   #include <algorithm>
+   sort(v.begin(), v.end());
+7. Consider shrink_to_fit() if you need to reduce memory usage
+
+🚀 Practical Example
+-----------------------
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> numbers;
+    numbers.reserve(10);
+    
+    // Add elements
+    for (int i = 0; i < 10; i++) {
+        numbers.emplace_back(i * 2);
+    }
+    
+    // Access elements
+    cout << "Element at index 5: " << numbers.at(5) << endl;
+    cout << "First element: " << numbers.front() << endl;
+    cout << "Last element: " << numbers.back() << endl;
+    
+    // Sort the vector
+    sort(numbers.begin(), numbers.end());
+    
+    // Iterate using range-based for loop
+    for (auto num : numbers) {
+        cout << num << " ";
+    }
+    
+    return 0;
+}
+
+🔚 Conclusion
+------------------
+Vectors are versatile, flexible, and efficient containers
+that should be your default choice for dynamic arrays in C++.
+
+Key advantages:
+- Automatic memory management
+- Random access to elements
+- Dynamic resizing with amortized O(1) time complexity
+- Rich set of member functions
+- Compatibility with STL algorithms
+
+Remember the size/capacity distinction and use reserve()
+to optimize performance when working with large vectors!
