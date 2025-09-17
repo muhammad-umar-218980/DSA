@@ -1,0 +1,198 @@
+📘 C++ STL 
+
+💡 Introduction
+------------------
+STL (Standard Template Library) provides pre-built classes and functions for common data structures and algorithms.
+It has 4 main components:
+- Containers
+- Iterators
+- Algorithms
+- Functors (Function Objects)
+
+
+🚀 CONTAINERS
+------------------
+
+🔷 Sequence Containers (Store data in linear sequence)
+
+📦 Vector
+   - Dynamic array
+   - Syntax: vector<int> v;
+   - Functions:
+        v.push_back(10)  → Add element at end
+        v.size()         → Return number of elements
+        v.empty()        → Check if empty
+        v.front()        → Access first element
+        v.back()         → Access last element
+        v.pop_back()     → Remove last element
+
+📦 List
+   - Doubly linked list
+   - Syntax: list<int> l;
+   - Functions:
+        push_back(), push_front()
+        pop_back(), pop_front()
+        remove() → Remove elements by value
+        sort(), reverse()   // member functions of list
+
+📦 Deque
+   - Double-ended queue
+   - Syntax: deque<int> dq;
+   - Functions:
+        push_back(), push_front()
+        pop_back(), pop_front()
+
+
+🔷 Container Adaptors (Provide restricted interface, built on other containers)
+
+📦 Stack
+   - LIFO (Last In First Out)
+   - Syntax: stack<int> st;
+   - Functions:
+        push(), pop()
+        top() → Access top element
+        empty(), size()
+
+📦 Queue
+   - FIFO (First In First Out)
+   - Syntax: queue<int> q;
+   - Functions:
+        push(), pop()
+        front() → Access front element
+        back() → Access back element
+        empty(), size()
+
+📦 Priority Queue
+   - Default: max heap (largest element at top)
+   - Min heap: priority_queue<int, vector<int>, greater<int>> pq;
+   - Functions:
+        push(), pop()
+        top() → Access top element
+
+
+🔷 Associative Containers (Automatically sorted using balanced BST)
+
+📦 Set
+   - Unique elements in sorted order
+   - Syntax: set<int> s;
+   - Functions:
+        insert(), erase()
+        find() → Returns iterator to element
+        count() → Returns 1 if exists, 0 otherwise
+        lower_bound() → First element >= value
+        upper_bound() → First element > value
+
+📦 MultiSet
+   - Allows duplicate elements
+   - Syntax: multiset<int> ms;
+
+📦 Map
+   - Stores key-value pairs, keys sorted
+   - Syntax: map<int,string> mp;
+   - Functions:
+        insert(), erase()
+        find(), count()
+
+📦 MultiMap
+   - Allows multiple same keys
+   - Syntax: multimap<int,string> mmp;
+
+
+🔷 Unordered Containers (Based on hashing)
+
+📦 Unordered Set
+   - Unique elements, no order
+   - Syntax: unordered_set<int> us;
+
+📦 Unordered Map
+   - Key-value pairs, not sorted
+   - Syntax: unordered_map<int,string> ump;
+
+
+⚡ push vs emplace
+   - push_back() → copies or moves object
+   - emplace_back() → constructs in place (faster, avoids temporary)
+
+
+🚀 ITERATORS
+------------------
+
+💡 Definition
+   - Objects that act like pointers, used to access container elements
+
+📋 Types of Iterators
+   - begin() → first element
+   - end() → one past last element
+   - rbegin() → last element (reverse)
+   - rend() → one before first element (reverse)
+   - advance(it, n) → move iterator
+   - next(it), prev(it) → step forward/backward
+
+💻 Example
+   vector<int> v = {10,20,30};
+   for(auto it = v.begin(); it != v.end(); it++) {
+       cout << *it << " ";
+   }
+
+
+🚀 ALGORITHMS
+------------------
+
+🔄 Sorting
+   - sort(v.begin(), v.end()) → ascending
+   - sort(v.begin(), v.end(), greater<int>()) → descending
+   - stable_sort() → keeps equal elements in original order
+
+🔍 Searching
+   - find(v.begin(), v.end(), x) → iterator to x
+   - binary_search(v.begin(), v.end(), x) → true/false
+
+📏 Bounds
+   - lower_bound(v.begin(), v.end(), x) → first element >= x
+   - upper_bound(v.begin(), v.end(), x) → first element > x
+
+📊 Other Useful Algorithms
+   - reverse() → reverse order
+   - max_element() → largest element
+   - min_element() → smallest element
+   - accumulate() → sum of elements (from <numeric>)
+   - count() → frequency of element
+   - next_permutation(), prev_permutation()
+
+
+🚀 FUNCTORS (FUNCTION OBJECTS)
+------------------
+
+💡 Definition
+   - Class/struct that overloads operator ()
+   - Acts like a function but can store states
+
+🧩 Built-in Functors
+   - Arithmetic: plus<int>(), minus<int>(), multiplies<int>(), divides<int>()
+   - Relational: equal_to<int>(), greater<int>(), less<int>()
+   - Logical: logical_and<bool>(), logical_or<bool>(), logical_not<bool>()
+
+🎛️ Custom Comparators
+   struct cmp {
+       bool operator()(int a, int b) const {
+           return a > b;   // descending order
+       }
+   };
+   sort(v.begin(), v.end(), cmp());
+
+
+🚀 UTILITIES
+------------------
+
+📦 Pair
+   - Stores two values together
+   - Syntax: pair<int,string> p = {1,"abc"};
+   - Access: p.first, p.second
+
+
+✅ Conclusion
+--------------
+C++ STL provides powerful, efficient, and ready-to-use data structures and algorithms
+that significantly reduce development time and improve code quality 🚀
+
+Use STL components to write cleaner, more maintainable, and efficient C++ code 💻
