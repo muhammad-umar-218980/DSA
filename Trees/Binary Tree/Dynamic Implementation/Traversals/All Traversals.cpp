@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 /*
@@ -44,16 +45,14 @@ class BinaryTree {
 				}
 				parent->left = new Node(data, parent);
 				cout << data << " inserted as LEFT child of " << parent->data << endl;
-			} 
-			else if (pos == 'r' || pos == 'R') {
+			} else if (pos == 'r' || pos == 'R') {
 				if (parent->right != nullptr) {
 					cout << "Right child already exists!" << endl;
 					return;
 				}
 				parent->right = new Node(data, parent);
 				cout << data << " inserted as RIGHT child of " << parent->data << endl;
-			} 
-			else {
+			} else {
 				cout << "Invalid position for child element!" << endl;
 				return;
 			}
@@ -112,8 +111,7 @@ class BinaryTree {
 						deletedNode->parent->right = child;
 					}
 					child->parent = deletedNode->parent;
-				} 
-				else {
+				} else {
 					this->root = child;
 					child->parent = nullptr;
 				}
@@ -135,8 +133,7 @@ class BinaryTree {
 						deletedNode->parent->right = leftChild;
 					}
 					leftChild->parent = deletedNode->parent;
-				} 
-				else {
+				} else {
 					this->root = leftChild;
 					leftChild->parent = nullptr;
 				}
@@ -175,6 +172,38 @@ class BinaryTree {
 			postOrder(root->right);
 			cout << root->data << " ";
 		}
+
+		void levelOrder(Node* root) {
+			if (root == nullptr) return;
+
+			queue<Node*> q;
+			q.push(root);
+			q.push(nullptr);
+
+			while (!q.empty()) {
+				Node* curr = q.front();
+				q.pop();
+
+				if (curr == nullptr) {
+					if (!q.empty()) {
+						cout << endl;
+						q.push(nullptr);
+						continue;
+					} else {
+						break;
+					}
+				}
+
+				cout << curr->data << " ";
+
+				if (curr->left != nullptr) {
+					q.push(curr->left);
+				}
+				if (curr->right != nullptr) {
+					q.push(curr->right);
+				}
+			}
+		}
 };
 
 int main() {
@@ -185,9 +214,14 @@ int main() {
 	bt.insertNode('E', bt.root->left, 'R');
 
 	cout << "\n\nBefore deletion:\n";
-	cout << "Preorder: "; bt.preOrder(bt.root);
-	cout << "\nInorder: "; bt.inOrder(bt.root);
-	cout << "\nPostorder: "; bt.postOrder(bt.root);
+	cout << "Preorder: ";
+	bt.preOrder(bt.root);
+	cout << "\nInorder: ";
+	bt.inOrder(bt.root);
+	cout << "\nPostorder: ";
+	bt.postOrder(bt.root);
+	cout << "\n\nLevelorder: ";
+	bt.levelOrder(bt.root);
 	cout << "\n\n";
 
 	bt.deleteNode(bt.root, 'E'); // leaf node
@@ -195,9 +229,14 @@ int main() {
 	bt.deleteNode(bt.root, 'A'); // two children
 
 	cout << "\nAfter deletion:\n";
-	cout << "Preorder: "; bt.preOrder(bt.root);
-	cout << "\nInorder: "; bt.inOrder(bt.root);
-	cout << "\nPostorder: "; bt.postOrder(bt.root);
+	cout << "Preorder: ";
+	bt.preOrder(bt.root);
+	cout << "\nInorder: ";
+	bt.inOrder(bt.root);
+	cout << "\nPostorder: ";
+	bt.postOrder(bt.root);
+	cout << "\n\nLevelorder: ";
+	bt.levelOrder(bt.root);
 	cout << "\n\n";
 
 	return 0;
