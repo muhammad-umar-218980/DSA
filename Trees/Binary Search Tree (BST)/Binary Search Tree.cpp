@@ -137,6 +137,17 @@ class BST {
 		}
 
 
+		int sumOfNodes(Node* root) {
+			if (root == nullptr) return 0;
+
+			int leftSum = sumOfNodes(root->left);
+			int rightSum = sumOfNodes(root->right);
+
+			return root->data + leftSum + rightSum;
+		}
+
+
+
 		void inorder(Node* root) {
 			if (root == nullptr) return;
 			inorder(root->left);
@@ -262,11 +273,14 @@ int main() {
 
 
 
-	cout << "\n\nHeight of BST: " << tree.height(tree.root) << "\n\n";
+	cout << "\nHeight of BST: " << tree.height(tree.root) << "\n\n";
 
 	cout << "\nTotal nodes in BST: " << tree.countNodes(tree.root) << "\n\n";
-	
+
 	cout << "\nTotal leaf nodes in BST: " << tree.countLeaves(tree.root) << "\n\n";
+	
+	cout << "\nSum of all nodes in BST: " << tree.sumOfNodes(tree.root) <<"\n\n";
+
 
 
 
