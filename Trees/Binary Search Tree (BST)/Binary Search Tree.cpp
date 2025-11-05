@@ -36,6 +36,7 @@ public:
     }
 
     Node* buildFromArray(int* arr, int n) {
+    	if (n == 0) return nullptr;
         for (int i = 0; i < n; i++) {
             root = insert(root, arr[i]);
         }
@@ -103,6 +104,15 @@ public:
         }
         return root;
     }
+    
+    int height(Node* root){
+    	if(root == nullptr) return 0;
+    	
+    	int leftHeight = height(root->left);
+    	int rightHeight = height(root->right);
+    	
+    	return max(leftHeight,rightHeight) + 1;
+	}
 
     void inorder(Node* root) {
         if (root == nullptr) return;
@@ -221,6 +231,11 @@ int main() {
     if (maxNode != nullptr) {
         cout << "Maximum value in BST: " << maxNode->data << endl;
     }
+    
+    
+    
+    cout << "\n\nHeight of BST: " << tree.height(tree.root) << endl;
+
 
     cout << "\nPreorder: ";
     tree.preorder(tree.root);
