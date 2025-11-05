@@ -113,6 +113,15 @@ public:
     	
     	return max(leftHeight,rightHeight) + 1;
 	}
+	
+	int countNodes(Node* root){
+		if(root == nullptr) return 0;
+		
+		int leftCount = countNodes(root->left);
+		int rightCount = countNodes(root->right);
+		
+		return leftCount+rightCount+1;
+	}
 
     void inorder(Node* root) {
         if (root == nullptr) return;
@@ -172,6 +181,11 @@ int main() {
     int size;
     cout << "Enter the size of the array: ";
     cin >> size;
+    
+        if (size == 0) {
+        cout << "Empty tree. Nothing to build.\n";
+        return 0;
+    }
 
     int* arr = new int[size];
     cout << "Enter " << size << " elements \n\n";
@@ -234,7 +248,11 @@ int main() {
     
     
     
-    cout << "\n\nHeight of BST: " << tree.height(tree.root) << endl;
+    cout << "\n\nHeight of BST: " << tree.height(tree.root) << "\n\n";
+    
+    cout << "\nTotal nodes in BST: " << tree.countNodes(tree.root) << "\n\n";
+
+    
 
 
     cout << "\nPreorder: ";
