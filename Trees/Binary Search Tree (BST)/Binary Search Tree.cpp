@@ -26,14 +26,11 @@ public:
         if (root == nullptr) {
             return new Node(value);
         }
-
         if (value < root->data) {
             root->left = insert(root->left, value);
-        } 
-        else if (value > root->data) {
+        } else if (value > root->data) {
             root->right = insert(root->right, value);
         }
-
         return root;
     }
 
@@ -46,7 +43,6 @@ public:
 
     void inorder(Node* root) {
         if (root == nullptr) return;
-
         inorder(root->left);
         cout << root->data << " ";
         inorder(root->right);
@@ -59,16 +55,18 @@ int main() {
     cin >> size;
 
     int* arr = new int[size];
-    cout << "Enter " << size << " elements:\n";
+    cout << "Enter " << size << " elements \n\n";
     for (int i = 0; i < size; i++) {
-        cout << "Enter element " << i + 1 << " : ";
+    	cout << "\nEnter element " << i+1 << " : ";
         cin >> arr[i];
     }
 
     BST tree(arr, size);
+    
+    Node* root = tree.root;
 
-    cout << "\nInorder Traversal of BST: ";
-    tree.inorder(tree.root);
+    cout << "Inorder Traversal of BST: ";
+    tree.inorder(root);
     cout << endl;
 
     delete[] arr;
